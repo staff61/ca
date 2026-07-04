@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tiệm Giày Cũ Bình Dương - Chấm Công</title>
+    <!-- Tailwind CSS cho thiết kế UI chuyên nghiệp, hiện đại -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font chữ Nunito trẻ trung, rõ nét -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome biểu tượng trực quan -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #F8FAFC;
+            -webkit-tap-highlight-color: transparent;
+        }
+        @keyframes subtleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+        .cute-float {
+            animation: subtleFloat 3s ease-in-out infinite;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FDA4AF;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="flex justify-center min-h-screen items-center sm:py-4">
+    <!-- Thiết bị chứa chuẩn Mobile-First (tối đa 480px) -->
+    <div class="w-full max-w-[480px] h-screen sm:h-[840px] bg-white sm:rounded-[40px] sm:shadow-2xl flex flex-col justify-between relative overflow-hidden border border-slate-100 sm:border-slate-200">
+        
+        <header class="bg-white px-5 py-4 border-b border-rose-50 flex items-center justify-between z-10">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-500 text-lg cute-float shadow-sm">
+                    <i class="fa-solid fa-shoe-prints"></i>
+                </div>
+                <div>
+                    <h1 class="font-black text-slate-800 text-base tracking-tight leading-tight">Tiệm Giày Cũ Bình Dương</h1>
+                    <p class="text-[10px] text-rose-500 font-bold uppercase tracking-wider">Hệ thống chấm công di động</p>
+                </div>
+            </div>
+            <!-- Hiển thị tháng hiện tại -->
+            <div class="bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-2xl text-xs font-black text-slate-600 shadow-sm" id="header-month">
+                Tháng --/----
+            </div>
+        </header>
+
+        <!-- Khung nội dung chính -->
+        <main class="flex-1 overflow-y-auto px-5 py-4" id="main-content">
+            
+            <section id="view-role-selector" class="space-y-6 py-6">
+                <div class="text-center space-y-2 py-4">
+                    <div class="text-5xl mb-1 cute-float">👟</div>
+                    <h2 class="text-xl font-black text-slate-800">Chọn tên nhân viên</h2>
+                    <p class="text-xs text-slate-400">Vui lòng chọn tài khoản cá nhân để chấm công hôm nay</p>
+                </div>
+
+                <div class="space-y-3.5">
+                    <!-- Nút nhân viên Thư -->
+                    <button onclick="selectEmployee('Thư')" class="w-full bg-white border border-slate-100 hover:border-rose-200 p-4 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-[0.98] group shadow-sm hover:shadow-md">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-rose-50 flex items-center justify-center text-rose-500 font-black text-lg">T</div>
+                            <div class="text-left">
+                                <p class="font-extrabold text-slate-800 text-base">Thư</p>
+                                <p class="text-[11px] text-slate-400 font-medium">Nhân viên cửa hàng</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-rose-500 transition-colors"></i>
+                    </button>
+
+                    <!-- Nút nhân viên Mai -->
+                    <button onclick="selectEmployee('Mai')" class="w-full bg-white border border-slate-100 hover:border-orange-200 p-4 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-[0.98] group shadow-sm hover:shadow-md">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-orange-500 font-black text-lg">M</div>
+                            <div class="text-left">
+                                <p class="font-extrabold text-slate-800 text-base">Mai</p>
+                                <p class="text-[11px] text-slate-400 font-medium">Nhân viên cửa hàng</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-orange-500 transition-colors"></i>
+                    </button>
+
+                    <div class="border-t border-dashed border-slate-200/60 my-6"></div>
+
+                    <!-- Nút đăng nhập Quản trị -->
+                    <button onclick="openStaffLogin()" class="w-full bg-slate-900 hover:bg-slate-800 text-white p-4 rounded-2xl flex items-center justify-between transition-all duration-300 active:scale-[0.98] shadow-md">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-rose-400">
+                                <i class="fa-solid fa-user-shield text-base"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="font-black text-white text-base">Staff</p>
+                                <p class="text-[11px] text-slate-400">Tài khoản quản lý hệ thống</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-lock text-slate-500"></i>
+                    </button>
+                </div>
+            </section>
+
+            <section id="view-attendance" class="hidden space-y-5">
+                <div class="flex items-center justify-between">
+                    <button onclick="goBackToHome()" class="text-slate-400 hover:text-slate-800 transition-colors py-1 flex items-center gap-1.5 text-xs font-black">
+                        <i class="fa-solid fa-arrow-left"></i> Trang chủ
+                    </button>
+                    <div id="active-user-badge" class="px-3 py-1 rounded-full text-xs font-black shadow-sm">
+                        Thư
+                    </div>
+                </div>
+
+                <!-- Thống kê thu nhập ước tính hiển thị 4 khung hoàn chỉnh cho nhân viên -->
+                <div class="bg-gradient-to-br from-rose-50/50 to-orange-50/50 p-4 rounded-3xl border border-rose-100/30 space-y-3 shadow-sm">
+                    <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Thu nhập ước tính tháng này</h3>
+                    <div class="grid grid-cols-2 gap-2 text-center">
+                        <div class="bg-white/90 p-2.5 rounded-2xl border border-rose-50 shadow-sm">
+                            <p class="text-[9px] font-bold text-slate-400 uppercase">Số giờ làm</p>
+                            <p class="text-base font-black text-slate-800" id="stat-hours">0h</p>
+                        </div>
+                        <div class="bg-white/90 p-2.5 rounded-2xl border border-rose-50 shadow-sm">
+                            <p class="text-[9px] font-bold text-slate-400 uppercase">Số giày bán</p>
+                            <p class="text-base font-black text-slate-800" id="stat-shoes">0 đôi</p>
+                        </div>
+                        <div class="bg-white/90 p-2.5 rounded-2xl border border-rose-50 shadow-sm">
+                            <p class="text-[9px] font-bold text-emerald-500 uppercase">Thưởng thêm</p>
+                            <p class="text-base font-black text-emerald-600" id="stat-bonus">0đ</p>
+                        </div>
+                        <div class="bg-white/90 p-2.5 rounded-2xl border border-rose-50 shadow-sm">
+                            <p class="text-[9px] font-bold text-rose-500 uppercase">Tạm tính lương</p>
+                            <p class="text-base font-black text-rose-600" id="stat-earnings">0đ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trạng thái phiên làm việc hiện tại -->
+                <div class="bg-white border border-slate-100 rounded-3xl p-5 text-center space-y-3 shadow-sm" id="shift-status-card">
+                    <span class="text-4xl cute-float block" id="shift-status-icon">💤</span>
+                    <div>
+                        <h4 class="font-extrabold text-slate-800 text-sm" id="shift-status-title">Hiện chưa vào ca</h4>
+                        <p class="text-[11px] text-slate-400 mt-1" id="shift-status-desc">Hệ thống ghi nhận thời gian thực tế dựa trên ảnh chụp xác thực nhanh.</p>
+                    </div>
+                </div>
+
+                <!-- Ô TỰ ĐIỀN HOA HỒNG GIÀY CỦA NHÂN VIÊN (Hiển thị khi kết ca) -->
+                <div id="employee-shoe-input-card" class="bg-white border-2 border-rose-100 rounded-3xl p-4 shadow-sm space-y-2.5 hidden">
+                    <p class="text-[10px] text-rose-500 font-extrabold uppercase tracking-wider text-center"><i class="fa-solid fa-receipt mr-1"></i>Vui lòng điền số đôi giày bán hôm nay</p>
+                    <div class="flex items-center justify-center gap-3">
+                        <button onclick="adjustEmployeeShoes(-1)" class="w-11 h-11 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center text-slate-700 font-black text-lg transition-all active:scale-90">-</button>
+                        <input type="number" id="employee-shoes-count" value="0" min="0" class="w-24 text-center border-2 border-rose-200 focus:border-rose-400 rounded-xl p-2 font-black text-xl focus:outline-none shadow-sm">
+                        <button onclick="adjustEmployeeShoes(1)" class="w-11 h-11 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center text-slate-700 font-black text-lg transition-all active:scale-90">+</button>
+                    </div>
+                    <p class="text-[9px] text-slate-400 text-center font-bold">Lưu ý: Hoa hồng tự động tính 10.000đ/đôi vào tiền lương tổng.</p>
+                </div>
+
+                <!-- Giao diện Chụp ảnh tinh giản (Không có khung xám khổng lồ) -->
+                <div class="bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl p-6 text-center space-y-4 relative overflow-hidden" id="camera-container">
+                    <div id="camera-ready-state" class="space-y-3">
+                        <div class="w-16 h-16 rounded-full bg-rose-100 flex items-center justify-center text-rose-500 text-2xl mx-auto shadow-sm">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                        <div>
+                            <p class="font-black text-xs text-slate-700">Yêu cầu chụp selfie xác nhận</p>
+                            <p class="text-[10px] text-slate-400 mt-1">Ảnh chụp sẽ được đồng bộ lên mây để đối soát khi cần thiết.</p>
+                        </div>
+                    </div>
+
+                    <!-- Xem trước ảnh gọn nhẹ sau khi chụp thành công -->
+                    <div id="captured-preview-container" class="hidden flex flex-col items-center space-y-2">
+                        <div class="w-24 h-24 rounded-2xl border-2 border-rose-400 overflow-hidden shadow-md">
+                            <img id="captured-preview" class="w-full h-full object-cover" alt="Ảnh chấm công">
+                        </div>
+                        <p class="text-[10px] text-emerald-500 font-extrabold"><i class="fa-solid fa-circle-check"></i> Đã chụp ảnh thành công!</p>
+                    </div>
+
+                    <!-- Nút kích hoạt Camera điện thoại gốc (Mở ứng dụng Camera gốc vô cùng nhanh) -->
+                    <label class="cursor-pointer inline-flex items-center gap-2 bg-rose-500 hover:bg-rose-600 active:scale-95 text-white text-xs font-black px-5 py-3 rounded-xl transition-all shadow-md shadow-rose-200">
+                        <i class="fa-solid fa-camera-rotate text-sm animate-pulse"></i> Chụp ảnh bằng Điện thoại
+                        <input type="file" accept="image/*" capture="user" class="hidden" onchange="handleFallbackFile(event)">
+                    </label>
+
+                    <!-- Màn hình tải lên mây ImgBB -->
+                    <div id="upload-overlay" class="absolute inset-0 bg-white/95 flex flex-col items-center justify-center text-center p-6 space-y-3 hidden z-20">
+                        <div class="w-8 h-8 border-4 border-rose-500 border-t-transparent rounded-full animate-spin"></div>
+                        <div>
+                            <p class="font-black text-xs text-slate-800 uppercase tracking-wider">Đang lưu ca làm lên đám mây</p>
+                            <p class="text-[10px] text-slate-400 mt-0.5">Xác thực dữ liệu trực tuyến...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Canvas ẩn để nén ảnh cực nhỏ tránh đầy bộ nhớ -->
+                <canvas id="canvas" class="hidden"></canvas>
+
+                <!-- Nút thao tác ghi nhận -->
+                <button id="btn-snap-action" onclick="submitAttendance()" disabled class="w-full bg-slate-100 text-slate-400 p-4 rounded-2xl flex items-center justify-center gap-2 font-black transition-all text-sm cursor-not-allowed">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Gửi ảnh & Chấm công
+                </button>
+            </section>
+
+            <section id="view-staff-login" class="hidden space-y-6 py-6">
+                <div class="flex items-center">
+                    <button onclick="goBackToHome()" class="text-slate-400 hover:text-slate-800 transition-colors py-1 flex items-center gap-1.5 text-xs font-black">
+                        <i class="fa-solid fa-arrow-left"></i> Trang chủ
+                    </button>
+                </div>
+
+                <div class="text-center space-y-2">
+                    <div class="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-800 text-2xl mx-auto border border-slate-100">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h2 class="text-lg font-black text-slate-800">Mật mã quản lý</h2>
+                    <p class="text-xs text-slate-400">Vui lòng nhập mật mã để truy cập trang cấu hình</p>
+                </div>
+
+                <div class="space-y-4 max-w-xs mx-auto">
+                    <input type="password" id="staff-password" placeholder="Mật mã quản trị..." class="w-full bg-slate-50 border border-slate-200 focus:border-rose-400 focus:bg-white text-center py-3 rounded-2xl text-slate-800 font-extrabold text-base focus:outline-none transition-all shadow-inner tracking-widest">
+                    <button onclick="submitStaffLogin()" class="w-full bg-slate-900 hover:bg-slate-800 text-white py-3.5 rounded-2xl font-black text-xs tracking-wider uppercase shadow-md transition-all active:scale-[0.98]">
+                        Đăng nhập quản trị
+                    </button>
+                </div>
+            </section>
+
+            <section id="view-staff-dashboard" class="hidden space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <button onclick="goBackToHome()" class="text-slate-400 hover:text-slate-800 transition-colors text-xs font-black flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                    </button>
+                    <span class="text-xs font-black text-rose-500 bg-rose-50/80 px-2.5 py-1 rounded-full"><i class="fa-solid fa-user-check mr-1"></i>Trình Quản Lý</span>
+                </div>
+
+                <!-- Bảng tổng thu nhập tháng này của từng nhân viên -->
+                <div class="space-y-3">
+                    <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest"><i class="fa-solid fa-wallet mr-1"></i>Thống kê tháng hiện tại</h3>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <!-- Quản trị Thư -->
+                        <div class="bg-white border border-slate-100 rounded-3xl p-4 shadow-sm relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-rose-500"></div>
+                            <p class="font-black text-slate-800 text-sm">Thư</p>
+                            <div class="mt-2.5 space-y-1 text-xs text-slate-500 font-bold">
+                                <p>Giờ làm: <span class="text-slate-800 font-black" id="sum-hours-Thư">0h</span></p>
+                                <p>Giày bán: <span class="text-slate-800 font-black" id="sum-shoes-Thư">0 đôi</span></p>
+                                <p>Thưởng: <span class="text-emerald-500 font-black" id="sum-bonus-Thư">0đ</span></p>
+                                <div class="border-t border-slate-100 pt-1.5 mt-1.5">
+                                    <p class="text-rose-500 text-sm font-black" id="sum-total-Thư">0đ</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quản trị Mai -->
+                        <div class="bg-white border border-slate-100 rounded-3xl p-4 shadow-sm relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-1 h-full bg-orange-500"></div>
+                            <p class="font-black text-slate-800 text-sm">Mai</p>
+                            <div class="mt-2.5 space-y-1 text-xs text-slate-500 font-bold">
+                                <p>Giờ làm: <span class="text-slate-800 font-black" id="sum-hours-Mai">0h</span></p>
+                                <p>Giày bán: <span class="text-slate-800 font-black" id="sum-shoes-Mai">0 đôi</span></p>
+                                <p>Thưởng: <span class="text-emerald-500 font-black" id="sum-bonus-Mai">0đ</span></p>
+                                <div class="border-t border-slate-100 pt-1.5 mt-1.5">
+                                    <p class="text-rose-500 text-sm font-black" id="sum-total-Mai">0đ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border border-rose-100 rounded-3xl p-4 shadow-sm space-y-3">
+                    <h3 class="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-gift text-rose-500"></i>Thưởng thêm tháng này
+                    </h3>
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <div>
+                            <label class="block text-[10px] text-slate-400 font-bold uppercase mb-1">Nhân viên</label>
+                            <select id="bonus-target" class="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs p-2.5 text-slate-700 font-black focus:outline-none focus:border-rose-400">
+                                <option value="Thư">Thư</option>
+                                <option value="Mai">Mai</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-slate-400 font-bold uppercase mb-1">Số tiền (đ)</label>
+                            <input type="number" id="bonus-amount" placeholder="Ví dụ: 100000" class="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs p-2.5 text-slate-700 font-black focus:outline-none focus:border-rose-400">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] text-slate-400 font-bold uppercase mb-1">Lý do thưởng</label>
+                        <input type="text" id="bonus-reason" placeholder="Ví dụ: Làm thêm giờ, hỗ trợ cửa hàng..." class="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs p-2.5 text-slate-700 font-bold focus:outline-none focus:border-rose-400">
+                    </div>
+                    <button onclick="applyBonus()" class="w-full bg-rose-500 hover:bg-rose-600 active:scale-[0.98] text-white py-2.5 rounded-xl text-xs font-black tracking-wider uppercase transition-all shadow-sm shadow-rose-100">
+                        Xác nhận cộng thưởng
+                    </button>
+                </div>
+
+                <!-- Tab lựa chọn chức năng quản lý -->
+                <div class="bg-slate-100 p-1 rounded-2xl flex gap-1">
+                    <button onclick="switchStaffTab('shifts')" id="tab-shifts" class="flex-1 text-center py-2 rounded-xl text-[11px] font-black transition-all bg-white text-slate-800 shadow-sm">
+                        <i class="fa-solid fa-list mr-1"></i>Chi tiết ca
+                    </button>
+                    <button onclick="switchStaffTab('history')" id="tab-history" class="flex-1 text-center py-2 rounded-xl text-[11px] font-black transition-all text-slate-500 hover:text-slate-800">
+                        <i class="fa-solid fa-clock-rotate-left mr-1"></i>Lịch sử tháng cũ
+                    </button>
+                    <button onclick="switchStaffTab('settings')" id="tab-settings" class="flex-1 text-center py-2 rounded-xl text-[11px] font-black transition-all text-slate-500 hover:text-slate-800">
+                        <i class="fa-solid fa-sliders mr-1"></i>Cấu hình đơn giá
+                    </button>
+                </div>
+
+                <!-- Khu vực nạp nội dung Tab chi tiết -->
+                <div id="tab-content" class="space-y-3">
+                    <!-- Tab: Danh sách các ca chi tiết -->
+                    <div id="staff-view-shifts" class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Nhật ký chi tiết các ca</h4>
+                            <span class="text-[9px] text-rose-500 font-bold bg-rose-50 px-2 py-0.5 rounded-md">Ảnh lưu trữ đám mây ImgBB</span>
+                        </div>
+                        <div id="shifts-list-container" class="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+                            <!-- Nạp qua Javascript -->
+                        </div>
+                    </div>
+
+                    <!-- Tab: Lịch sử tiền lương đã lưu trữ tháng cũ -->
+                    <div id="staff-view-history" class="hidden space-y-3">
+                        <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Tiền lương đã chốt các tháng trước</h4>
+                        <div id="history-list-container" class="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+                            <!-- Nạp qua Javascript -->
+                        </div>
+                    </div>
+
+                    <!-- Tab: Chỉnh sửa cấu hình hệ thống -->
+                    <div id="staff-view-settings" class="hidden space-y-4 bg-slate-50 border border-slate-100 p-4 rounded-3xl">
+                        <h4 class="text-xs font-black text-slate-700 uppercase tracking-wider border-b border-slate-200 pb-2"><i class="fa-solid fa-sliders mr-1"></i>Thay đổi thông số đơn giá</h4>
+                        
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-[9px] text-slate-500 font-black uppercase mb-1">Mật khẩu Staff mới</label>
+                                <input type="password" id="cfg-password" class="w-full bg-white border border-slate-200 rounded-xl text-xs p-2.5 font-bold focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[9px] text-slate-500 font-black uppercase mb-1">Đơn giá Lương giờ (đ/h)</label>
+                                <input type="number" id="cfg-hourly-rate" class="w-full bg-white border border-slate-200 rounded-xl text-xs p-2.5 font-bold focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[9px] text-slate-500 font-black uppercase mb-1">Hoa hồng 1 đôi giày (đ/đôi)</label>
+                                <input type="number" id="cfg-shoe-rate" class="w-full bg-white border border-slate-200 rounded-xl text-xs p-2.5 font-bold focus:outline-none">
+                            </div>
+                        </div>
+
+                        <button onclick="saveSettings()" class="w-full bg-rose-500 hover:bg-rose-600 text-white py-3 rounded-xl text-xs font-black transition-all shadow-sm">
+                            Cập nhật hệ thống
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer chân ứng dụng -->
+        <footer class="bg-white border-t border-slate-100 p-3.5 flex items-center justify-around text-slate-400 z-10">
+            <button onclick="goBackToHome()" class="flex flex-col items-center gap-0.5 text-[10px] font-black text-rose-500">
+                <i class="fa-solid fa-home text-base"></i>
+                <span>Trang chủ</span>
+            </button>
+            <div class="w-px h-5 bg-slate-200/60"></div>
+            <div class="text-[9px] font-black text-slate-300 uppercase tracking-widest">
+                Tiệm Giày Cũ Bình Dương
+            </div>
+        </footer>
+
+        <!-- Custom Confirm Modal -->
+        <div id="confirm-modal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 hidden">
+            <div class="bg-white rounded-[32px] w-full max-w-[340px] border border-slate-100 p-6 space-y-4 shadow-2xl text-center transform scale-95 opacity-0 transition-all duration-300" id="confirm-modal-box">
+                <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center text-xl mx-auto cute-float shadow-sm">
+                    <i class="fa-solid fa-circle-question"></i>
+                </div>
+                <div class="space-y-1">
+                    <h4 class="font-black text-slate-800 text-base" id="confirm-title">Tiêu đề xác nhận</h4>
+                    <p class="text-xs text-slate-400 leading-relaxed" id="confirm-desc">Mô tả thông tin chi tiết.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-2.5 pt-2">
+                    <button id="btn-confirm-cancel" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-extrabold py-3 rounded-xl text-xs transition-all">
+                        Quay lại
+                    </button>
+                    <button id="btn-confirm-ok" class="bg-rose-500 hover:bg-rose-600 text-white font-black py-3 rounded-xl text-xs transition-all">
+                        Xác nhận
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hộp thông báo nhanh (Toast Notification) -->
+        <div id="toast-notif" class="absolute top-16 left-4 right-4 bg-slate-900 text-white px-4 py-3.5 rounded-2xl flex items-center gap-2.5 text-xs font-bold shadow-lg transform -translate-y-24 opacity-0 transition-all duration-300 z-50">
+            <span id="toast-icon" class="text-rose-400"><i class="fa-solid fa-circle-info"></i></span>
+            <span id="toast-msg" class="leading-snug">Thông báo</span>
+        </div>
+    </div>
+
+    <script>
+        // API key của ImgBB đã tích hợp sẵn
+        const IMGBB_API_KEY = "7c324c53133e672a4a10bfdabc96ff4a";
+
+        // Trạng thái vận hành ứng dụng
+        let state = {
+            activeUser: null,
+            tempBase64Image: null,
+            currentMonth: "", // Định dạng chuẩn YYYY-MM
+            currentTab: 'shifts',
+            config: {
+                password: "123", // Mật mã mặc định
+                hourlyRate: 20000, // 20k / giờ
+                shoeRate: 10000 // 10k / đôi giày
+            },
+            shifts: [],
+            bonuses: [],
+            historicalSalaries: []
+        };
+
+        window.onload = function() {
+            loadState();
+            initializeTimeContext();
+            checkAndRolloverMonth();
+            renderHeaderAndStats();
+        };
+
+        function loadState() {
+            const saved = localStorage.getItem("tiemgiay_state_v4_refined");
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    state.config = parsed.config || state.config;
+                    state.shifts = parsed.shifts || [];
+                    state.bonuses = parsed.bonuses || [];
+                    state.historicalSalaries = parsed.historicalSalaries || [];
+                } catch (e) {
+                    console.error("Lỗi phục hồi dữ liệu:", e);
+                }
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem("tiemgiay_state_v4_refined", JSON.stringify({
+                config: state.config,
+                shifts: state.shifts,
+                bonuses: state.bonuses,
+                historicalSalaries: state.historicalSalaries
+            }));
+        }
+
+        function initializeTimeContext() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            state.currentMonth = `${year}-${month}`;
+            document.getElementById('header-month').innerText = `Tháng ${month}/${year}`;
+        }
+
+        // Tự động chốt lương lưu trữ và xóa ảnh cũ ngày đầu tháng
+        function checkAndRolloverMonth() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const currentActualMonth = `${year}-${month}`;
+
+            const pastShifts = state.shifts.filter(s => {
+                const shiftMonth = s.ngay.substring(0, 7);
+                return shiftMonth < currentActualMonth;
+            });
+
+            if (pastShifts.length > 0) {
+                const uniquePastMonths = [...new Set(pastShifts.map(s => s.ngay.substring(0, 7)))];
+
+                uniquePastMonths.forEach(oldMonth => {
+                    ['Thư', 'Mai'].forEach(nv => {
+                        const nvShifts = state.shifts.filter(s => s.nhanVien === nv && s.ngay.startsWith(oldMonth));
+                        const nvBonuses = state.bonuses.filter(b => b.nhanVien === nv && b.ngay.startsWith(oldMonth));
+
+                        let totalHours = 0;
+                        let totalShoes = 0;
+                        nvShifts.forEach(s => {
+                            if (s.vao && s.ra) {
+                                totalHours += calculateWorkingHours(s.vao, s.ra);
+                            }
+                            totalShoes += parseInt(s.hoaHongGiay || 0);
+                        });
+
+                        let totalBonus = nvBonuses.reduce((sum, b) => sum + parseInt(b.soTien || 0), 0);
+                        let totalSalary = (totalHours * state.config.hourlyRate) + (totalShoes * state.config.shoeRate) + totalBonus;
+
+                        if (totalHours > 0 || totalShoes > 0 || totalBonus > 0) {
+                            state.historicalSalaries.push({
+                                id: crypto.randomUUID(),
+                                thang: oldMonth,
+                                nhanVien: nv,
+                                gioLam: totalHours.toFixed(2),
+                                giay: totalShoes,
+                                thuong: totalBonus,
+                                tongLuong: totalSalary
+                            });
+                        }
+                    });
+
+                    // Xóa triệt để các dữ liệu ca làm và ảnh của tháng trước
+                    state.shifts = state.shifts.filter(s => !s.ngay.startsWith(oldMonth));
+                    state.bonuses = state.bonuses.filter(b => !b.ngay.startsWith(oldMonth));
+                });
+
+                saveState();
+                showToast("Hệ thống tự động chốt lương tháng trước và dọn sạch dữ liệu ảnh cũ!", "success");
+            }
+        }
+
+        function showScreen(screenId) {
+            document.getElementById('view-role-selector').classList.add('hidden');
+            document.getElementById('view-attendance').classList.add('hidden');
+            document.getElementById('view-staff-login').classList.add('hidden');
+            document.getElementById('view-staff-dashboard').classList.add('hidden');
+
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+
+        function goBackToHome() {
+            state.activeUser = null;
+            state.tempBase64Image = null;
+            resetImagePreview();
+            showScreen('view-role-selector');
+        }
+
+        function selectEmployee(name) {
+            state.activeUser = name;
+            const badge = document.getElementById('active-user-badge');
+            badge.innerText = name;
+            
+            if (name === 'Thư') {
+                badge.className = "bg-rose-50 text-rose-600 px-3 py-1 rounded-full text-xs font-black border border-rose-100";
+            } else {
+                badge.className = "bg-orange-50 text-orange-600 px-3 py-1 rounded-full text-xs font-black border border-orange-100";
+            }
+
+            renderEmployeeStatus();
+            renderHeaderAndStats();
+            showScreen('view-attendance');
+            resetImagePreview();
+        }
+
+        function adjustEmployeeShoes(amount) {
+            const input = document.getElementById('employee-shoes-count');
+            let current = parseInt(input.value) || 0;
+            current = Math.max(0, current + amount);
+            input.value = current;
+        }
+
+        function renderEmployeeStatus() {
+            const todayStr = getTodayString();
+            const activeShift = state.shifts.find(s => s.nhanVien === state.activeUser && s.ngay === todayStr);
+
+            const icon = document.getElementById('shift-status-icon');
+            const title = document.getElementById('shift-status-title');
+            const desc = document.getElementById('shift-status-desc');
+            const btn = document.getElementById('btn-snap-action');
+            const shoeCard = document.getElementById('employee-shoe-input-card');
+
+            if (!activeShift) {
+                icon.innerText = "💤";
+                title.innerText = "Chưa ghi nhận ca làm";
+                desc.innerText = "Vui lòng mở camera di động để xác nhận BẮT ĐẦU ca làm hôm nay.";
+                btn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Gửi ảnh & Chấm công VÀO CA`;
+                shoeCard.classList.add('hidden');
+            } else if (activeShift.vao && !activeShift.ra) {
+                icon.innerText = "🏃";
+                title.innerText = "Đang trong ca làm việc";
+                desc.innerText = `Thời gian thực tế lúc vào: ${activeShift.rawVao} (Làm tròn: ${activeShift.vao})`;
+                btn.innerHTML = `<i class="fa-solid fa-cloud-arrow-up"></i> Gửi ảnh & Chấm công KẾT CA`;
+                
+                // Hiển thị khung điền hoa hồng giày cho nhân viên khi họ kết ca
+                shoeCard.classList.remove('hidden');
+                document.getElementById('employee-shoes-count').value = activeShift.hoaHongGiay || 0;
+            } else {
+                icon.innerText = "✅";
+                title.innerText = "Đã hoàn thành ca làm";
+                desc.innerText = `Phiên làm việc từ ${activeShift.vao} đến ${activeShift.ra}. Đã bán: ${activeShift.hoaHongGiay} đôi giày.`;
+                btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> Đã hoàn thành ca hôm nay`;
+                btn.disabled = true;
+                btn.className = "w-full bg-slate-100 text-slate-400 p-4 rounded-2xl flex items-center justify-center gap-2 font-black cursor-not-allowed text-sm shadow-none";
+                shoeCard.classList.add('hidden');
+                return;
+            }
+
+            btn.className = "w-full bg-slate-100 text-slate-400 p-4 rounded-2xl flex items-center justify-center gap-2 font-black text-sm cursor-not-allowed shadow-none";
+            btn.disabled = true;
+        }
+
+        function renderHeaderAndStats() {
+            if (!state.activeUser) return;
+            const currentMonthShifts = state.shifts.filter(s => s.nhanVien === state.activeUser && s.ngay.startsWith(state.currentMonth));
+            const currentMonthBonuses = state.bonuses.filter(b => b.nhanVien === state.activeUser && b.ngay.startsWith(state.currentMonth));
+
+            let totalHours = 0;
+            let totalShoes = 0;
+            currentMonthShifts.forEach(s => {
+                if (s.vao && s.ra) {
+                    totalHours += calculateWorkingHours(s.vao, s.ra);
+                }
+                totalShoes += parseInt(s.hoaHongGiay || 0);
+            });
+
+            let totalBonus = currentMonthBonuses.reduce((sum, b) => sum + parseInt(b.soTien || 0), 0);
+            let estimatedEarnings = (totalHours * state.config.hourlyRate) + (totalShoes * state.config.shoeRate) + totalBonus;
+
+            document.getElementById('stat-hours').innerText = `${totalHours.toFixed(2)}h`;
+            document.getElementById('stat-shoes').innerText = `${totalShoes} đôi`;
+            document.getElementById('stat-bonus').innerText = `${totalBonus.toLocaleString('vi-VN')}đ`;
+            document.getElementById('stat-earnings').innerText = `${estimatedEarnings.toLocaleString('vi-VN')}đ`;
+        }
+
+        function resetImagePreview() {
+            state.tempBase64Image = null;
+            document.getElementById('captured-preview-container').classList.add('hidden');
+            document.getElementById('camera-ready-state').classList.remove('hidden');
+            
+            const btn = document.getElementById('btn-snap-action');
+            if (btn && !btn.disabled) {
+                btn.disabled = true;
+                btn.className = "w-full bg-slate-100 text-slate-400 p-4 rounded-2xl flex items-center justify-center gap-2 font-black text-sm cursor-not-allowed shadow-none";
+            }
+        }
+
+        function handleFallbackFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const tempImg = new Image();
+                tempImg.onload = function() {
+                    const canvas = document.getElementById('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.width = 200;
+                    canvas.height = 200;
+                    context.drawImage(tempImg, 0, 0, canvas.width, canvas.height);
+                    
+                    state.tempBase64Image = canvas.toDataURL('image/jpeg', 0.65);
+                    
+                    document.getElementById('captured-preview').src = state.tempBase64Image;
+                    document.getElementById('captured-preview-container').classList.remove('hidden');
+                    document.getElementById('camera-ready-state').classList.add('hidden');
+                    
+                    // Kích hoạt nút bấm gửi ảnh lên mây
+                    const btn = document.getElementById('btn-snap-action');
+                    btn.disabled = false;
+                    btn.className = "w-full bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white p-4 rounded-2xl flex items-center justify-center gap-2 font-black transition-all shadow-md shadow-rose-200/50 text-sm active:scale-[0.98]";
+                };
+                tempImg.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function submitAttendance() {
+            if (!state.tempBase64Image) {
+                showToast("Vui lòng chụp ảnh xác nhận trước!", "error");
+                return;
+            }
+
+            document.getElementById('upload-overlay').classList.remove('hidden');
+
+            try {
+                const base64Raw = state.tempBase64Image.split(',')[1];
+                const formData = new FormData();
+                formData.append('image', base64Raw);
+
+                const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                
+                if (result.success && result.data && result.data.url) {
+                    confirmAttendance(result.data.url);
+                } else {
+                    throw new Error("Lỗi kết nối API ImgBB");
+                }
+            } catch (err) {
+                console.error("Lỗi tải ảnh lên ImgBB:", err);
+                const fallbackUrl = "https://placehold.co/200x200/fff1f2/9f1239?text=Offline_Photo";
+                confirmAttendance(fallbackUrl);
+            } finally {
+                document.getElementById('upload-overlay').classList.add('hidden');
+            }
+        }
+
+        function confirmAttendance(photoUrl) {
+            const todayStr = getTodayString();
+            const now = new Date();
+            const rawTimeStr = formatHHMM(now);
+            const roundedTimeStr = formatHHMM(getRoundedTime(now));
+
+            let activeShift = state.shifts.find(s => s.nhanVien === state.activeUser && s.ngay === todayStr);
+
+            if (!activeShift) {
+                // Vào ca làm việc
+                const newShift = {
+                    id: crypto.randomUUID(),
+                    nhanVien: state.activeUser,
+                    ngay: todayStr,
+                    vao: roundedTimeStr,
+                    rawVao: rawTimeStr,
+                    ra: null,
+                    rawRa: null,
+                    hoaHongGiay: 0,
+                    hinhVao: photoUrl,
+                    hinhRa: null
+                };
+                state.shifts.push(newShift);
+                saveState();
+                showToast(`Đã VÀO CA lúc ${rawTimeStr} (Tính công: ${roundedTimeStr})`, "success");
+                goBackToHome();
+            } else if (activeShift.vao && !activeShift.ra) {
+                // Kết thúc ca làm việc
+                const shoesCount = parseInt(document.getElementById('employee-shoes-count').value) || 0;
+                
+                showConfirmModal(
+                    "XÁC NHẬN KẾT CA", 
+                    `Bạn muốn kết ca lúc ${rawTimeStr} và ghi nhận đã bán được ${shoesCount} đôi giày hôm nay đúng không?`, 
+                    function() {
+                        activeShift.ra = roundedTimeStr;
+                        activeShift.rawRa = rawTimeStr;
+                        activeShift.hoaHongGiay = shoesCount;
+                        activeShift.hinhRa = photoUrl;
+
+                        saveState();
+                        showToast(`Đã KẾT CA thành công! Đã bán: ${shoesCount} đôi giày.`, "success");
+                        goBackToHome();
+                    }
+                );
+            }
+        }
+
+        // Quy luật làm tròn giờ:
+        // - Trễ dưới 15 phút (0 -> 14) -> Làm tròn xuống phút 00 của giờ hiện tại.
+        // - Trễ từ 30 đến 44 phút (30 -> 44) -> Làm tròn xuống phút 30 của giờ hiện tại.
+        // - Trễ từ 15 phút trở lên: Giữ nguyên thời gian thực tế, không làm tròn.
+        function getRoundedTime(date) {
+            const rounded = new Date(date);
+            const mins = date.getMinutes();
+            let finalMins = mins;
+
+            if (mins >= 0 && mins < 15) {
+                finalMins = 0;
+            } else if (mins >= 30 && mins < 45) {
+                finalMins = 30;
+            } else {
+                finalMins = mins; 
+            }
+
+            rounded.setMinutes(finalMins);
+            rounded.setSeconds(0);
+            rounded.setMilliseconds(0);
+            return rounded;
+        }
+
+        function calculateWorkingHours(startTimeStr, endTimeStr) {
+            const [sHrs, sMins] = startTimeStr.split(':').map(Number);
+            const [eHrs, eMins] = endTimeStr.split(':').map(Number);
+
+            let diffInMinutes = (eHrs * 60 + eMins) - (sHrs * 60 + sMins);
+            if (diffInMinutes < 0) {
+                diffInMinutes += 24 * 60; // Hỗ trợ ca đêm xuyên ngày
+            }
+            return diffInMinutes / 60;
+        }
+
+        function openStaffLogin() {
+            document.getElementById('staff-password').value = "";
+            showScreen('view-staff-login');
+        }
+
+        function submitStaffLogin() {
+            const pass = document.getElementById('staff-password').value;
+            if (pass === state.config.password) {
+                showToast("Truy cập quyền quản lý thành công!", "success");
+                showScreen('view-staff-dashboard');
+                renderStaffDashboard();
+            } else {
+                showToast("Mật mã không đúng!", "error");
+            }
+        }
+
+        function renderStaffDashboard() {
+            document.getElementById('cfg-password').value = state.config.password;
+            document.getElementById('cfg-hourly-rate').value = state.config.hourlyRate;
+            document.getElementById('cfg-shoe-rate').value = state.config.shoeRate;
+
+            ['Thư', 'Mai'].forEach(nv => {
+                const currentMonthShifts = state.shifts.filter(s => s.nhanVien === nv && s.ngay.startsWith(state.currentMonth));
+                const currentMonthBonuses = state.bonuses.filter(b => b.nhanVien === nv && b.ngay.startsWith(state.currentMonth));
+
+                let totalHours = 0;
+                let totalShoes = 0;
+                currentMonthShifts.forEach(s => {
+                    if (s.vao && s.ra) {
+                        totalHours += calculateWorkingHours(s.vao, s.ra);
+                    }
+                    totalShoes += parseInt(s.hoaHongGiay || 0);
+                });
+
+                let totalBonus = currentMonthBonuses.reduce((sum, b) => sum + parseInt(b.soTien || 0), 0);
+                let totalSalary = (totalHours * state.config.hourlyRate) + (totalShoes * state.config.shoeRate) + totalBonus;
+
+                document.getElementById(`sum-hours-${nv}`).innerText = `${totalHours.toFixed(2)}h`;
+                document.getElementById(`sum-shoes-${nv}`).innerText = `${totalShoes} đôi`;
+                document.getElementById(`sum-bonus-${nv}`).innerText = `${totalBonus.toLocaleString('vi-VN')}đ`;
+                document.getElementById(`sum-total-${nv}`).innerText = `${totalSalary.toLocaleString('vi-VN')}đ`;
+            });
+
+            renderActiveStaffTab();
+        }
+
+        function applyBonus() {
+            const target = document.getElementById('bonus-target').value;
+            const amount = parseInt(document.getElementById('bonus-amount').value);
+            const reason = document.getElementById('bonus-reason').value || "Thưởng nóng";
+
+            if (!amount || amount <= 0) {
+                showToast("Điền số tiền thưởng hợp lệ!", "error");
+                return;
+            }
+
+            state.bonuses.push({
+                id: crypto.randomUUID(),
+                nhanVien: target,
+                ngay: getTodayString(),
+                soTien: amount,
+                lyDo: reason
+            });
+
+            saveState();
+            showToast(`Cộng thưởng ${amount.toLocaleString('vi-VN')}đ cho ${target}!`, "success");
+
+            document.getElementById('bonus-amount').value = "";
+            document.getElementById('bonus-reason').value = "";
+
+            renderStaffDashboard();
+        }
+
+        function switchStaffTab(tabName) {
+            state.currentTab = tabName;
+            
+            const btnShifts = document.getElementById('tab-shifts');
+            const btnHistory = document.getElementById('tab-history');
+            const btnSettings = document.getElementById('tab-settings');
+
+            [btnShifts, btnHistory, btnSettings].forEach(btn => {
+                btn.className = "flex-1 text-center py-2 rounded-xl text-[11px] font-black transition-all text-slate-500 hover:text-slate-800";
+            });
+
+            const activeBtn = document.getElementById(`tab-${tabName}`);
+            activeBtn.className = "flex-1 text-center py-2 rounded-xl text-[11px] font-black transition-all bg-white text-slate-800 shadow-sm";
+
+            renderActiveStaffTab();
+        }
+
+        function renderActiveStaffTab() {
+            const containerShifts = document.getElementById('staff-view-shifts');
+            const containerHistory = document.getElementById('staff-view-history');
+            const containerSettings = document.getElementById('staff-view-settings');
+
+            containerShifts.classList.add('hidden');
+            containerHistory.classList.add('hidden');
+            containerSettings.classList.add('hidden');
+
+            if (state.currentTab === 'shifts') {
+                containerShifts.classList.remove('hidden');
+                renderShiftsTab();
+            } else if (state.currentTab === 'history') {
+                containerHistory.classList.remove('hidden');
+                renderHistoryTab();
+            } else if (state.currentTab === 'settings') {
+                containerSettings.classList.remove('hidden');
+            }
+        }
+
+        function renderShiftsTab() {
+            const list = document.getElementById('shifts-list-container');
+            list.innerHTML = "";
+
+            const currentMonthShifts = state.shifts
+                .filter(s => s.ngay.startsWith(state.currentMonth))
+                .sort((a, b) => b.ngay.localeCompare(a.ngay));
+
+            if (currentMonthShifts.length === 0) {
+                list.innerHTML = `<p class="text-xs text-slate-400 text-center py-8 font-bold">Chưa ghi nhận ca làm việc nào trong tháng này.</p>`;
+                return;
+            }
+
+            currentMonthShifts.forEach(s => {
+                const isFinished = (s.vao && s.ra);
+                const hrs = isFinished ? calculateWorkingHours(s.vao, s.ra).toFixed(2) : 0;
+                const statusColor = s.nhanVien === 'Thư' ? 'rose' : 'orange';
+
+                const shiftCard = document.createElement('div');
+                shiftCard.className = "bg-white border border-slate-100 rounded-2xl p-4 space-y-3.5 shadow-sm text-xs relative";
+                shiftCard.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-black text-${statusColor}-500 text-sm">${s.nhanVien}</span>
+                        <span class="text-slate-400 font-extrabold text-[10px]">${formatDateVietnamese(s.ngay)}</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                        <div>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Giờ vào ca (Không thể sửa)</p>
+                            <p class="font-black text-slate-700 mt-0.5">${s.vao} <span class="text-[9px] text-slate-400 font-normal">(${s.rawVao})</span></p>
+                            ${s.hinhVao ? `<a href="${s.hinhVao}" target="_blank" class="inline-block mt-1 text-rose-500 font-bold text-[10px] hover:underline"><i class="fa-solid fa-image"></i> Xem ảnh vào ca</a>` : ''}
+                        </div>
+                        <div>
+                            <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Giờ ra ca (Không thể sửa)</p>
+                            <p class="font-black text-slate-700 mt-0.5">${s.ra ? `${s.ra} <span class="text-[9px] text-slate-400 font-normal">(${s.rawRa})</span>` : "Đang làm..."}</p>
+                            ${s.hinhRa ? `<a href="${s.hinhRa}" target="_blank" class="inline-block mt-1 text-rose-500 font-bold text-[10px] hover:underline"><i class="fa-solid fa-image"></i> Xem ảnh ra ca</a>` : ''}
+                        </div>
+                    </div>
+
+                    <!-- Khu vực điều chỉnh hoa hồng giày trực tiếp -->
+                    <div class="flex items-center justify-between pt-1 border-t border-slate-50">
+                        <div class="flex items-center gap-3">
+                            <p class="text-slate-500 font-bold">Giờ làm: <span class="text-slate-800 font-black">${hrs}h</span></p>
+                            <div class="flex items-center gap-1.5 bg-rose-50/50 px-2.5 py-1 rounded-xl border border-rose-100/40">
+                                <span class="text-rose-500 font-black text-[10px] uppercase">Sửa giày:</span>
+                                <input type="number" value="${s.hoaHongGiay}" onchange="updateShiftShoes('${s.id}', this.value)" class="w-12 bg-white border border-rose-200 text-center text-rose-600 font-black rounded-lg py-0.5 focus:outline-none focus:border-rose-400">
+                            </div>
+                        </div>
+                        <button onclick="deleteShift('${s.id}')" class="text-slate-300 hover:text-rose-500 transition-colors p-1">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+                list.appendChild(shiftCard);
+            });
+        }
+
+        function renderHistoryTab() {
+            const list = document.getElementById('history-list-container');
+            list.innerHTML = "";
+
+            if (state.historicalSalaries.length === 0) {
+                list.innerHTML = `<p class="text-xs text-slate-400 text-center py-8 font-bold">Chưa có lịch sử các tháng trước.</p>`;
+                return;
+            }
+
+            const sortedHistory = [...state.historicalSalaries].sort((a, b) => b.thang.localeCompare(a.thang));
+
+            sortedHistory.forEach(h => {
+                const card = document.createElement('div');
+                card.className = "bg-white border border-slate-100 rounded-2xl p-4 space-y-2.5 shadow-sm text-xs";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-black text-slate-800 text-sm">Tháng ${h.thang.substring(5)}/${h.thang.substring(0, 4)}</span>
+                        <span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-lg text-[9px] font-black uppercase">${h.nhanVien}</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-1.5 text-center text-slate-500 font-bold py-2 bg-slate-50 rounded-xl border border-slate-100">
+                        <div>
+                            <p class="text-[9px] text-slate-400 uppercase">Giờ làm</p>
+                            <p class="text-slate-800 font-black">${h.gioLam}h</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] text-slate-400 uppercase">Số giày</p>
+                            <p class="text-slate-800 font-black">${h.giay} đôi</p>
+                        </div>
+                        <div>
+                            <p class="text-[9px] text-slate-400 uppercase">Thưởng thêm</p>
+                            <p class="text-emerald-500 font-black">${h.thuong.toLocaleString('vi-VN')}đ</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-1 border-t border-dashed border-slate-100">
+                        <span class="text-[9px] text-slate-400 font-black uppercase">Thực lãnh</span>
+                        <span class="text-rose-500 font-black text-sm">${h.tongLuong.toLocaleString('vi-VN')}đ</span>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function updateShiftShoes(shiftId, value) {
+            const parsedVal = parseInt(value);
+            if (isNaN(parsedVal) || parsedVal < 0) {
+                showToast("Số lượng giày không hợp lệ!", "error");
+                return;
+            }
+
+            const shift = state.shifts.find(s => s.id === shiftId);
+            if (shift) {
+                shift.hoaHongGiay = parsedVal;
+                saveState();
+                showToast("Đã thay đổi hoa hồng số giày thành công!", "success");
+                renderStaffDashboard();
+            }
+        }
+
+        function deleteShift(shiftId) {
+            showConfirmModal(
+                "XÓA CA LÀM VIỆC",
+                "Hành động này không thể hoàn tác. Bạn có chắc chắn muốn xóa không?",
+                function() {
+                    state.shifts = state.shifts.filter(s => s.id !== shiftId);
+                    saveState();
+                    showToast("Đã xóa ca thành công!", "success");
+                    renderStaffDashboard();
+                }
+            );
+        }
+
+        function saveSettings() {
+            const pass = document.getElementById('cfg-password').value;
+            const hourly = parseInt(document.getElementById('cfg-hourly-rate').value);
+            const shoe = parseInt(document.getElementById('cfg-shoe-rate').value);
+
+            if (!pass || isNaN(hourly) || isNaN(shoe)) {
+                showToast("Cài đặt thông số hợp lệ!", "error");
+                return;
+            }
+
+            state.config.password = pass;
+            state.config.hourlyRate = hourly;
+            state.config.shoeRate = shoe;
+
+            saveState();
+            showToast("Đã cập nhật hệ thống thành công!", "success");
+            renderStaffDashboard();
+        }
+
+        function getTodayString() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function formatHHMM(date) {
+            const hrs = String(date.getHours()).padStart(2, '0');
+            const mins = String(date.getMinutes()).padStart(2, '0');
+            return `${hrs}:${mins}`;
+        }
+
+        function formatDateVietnamese(dateStr) {
+            const [year, month, day] = dateStr.split('-');
+            return `${day}/${month}/${year}`;
+        }
+
+        function showToast(message, type = "success") {
+            const toast = document.getElementById('toast-notif');
+            const icon = document.getElementById('toast-icon');
+            const msg = document.getElementById('toast-msg');
+
+            msg.innerText = message;
+            
+            if (type === "success") {
+                icon.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>`;
+            } else {
+                icon.innerHTML = `<i class="fa-solid fa-circle-exclamation text-rose-500 text-base"></i>`;
+            }
+
+            toast.classList.remove('-translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('-translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        let activeConfirmCallback = null;
+        function showConfirmModal(title, desc, callback = null) {
+            document.getElementById('confirm-title').innerText = title;
+            document.getElementById('confirm-desc').innerText = desc;
+            
+            activeConfirmCallback = callback;
+
+            const modal = document.getElementById('confirm-modal');
+            const box = document.getElementById('confirm-modal-box');
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                box.classList.remove('scale-95', 'opacity-0');
+                box.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeConfirmModal() {
+            const modal = document.getElementById('confirm-modal');
+            const box = document.getElementById('confirm-modal-box');
+
+            box.classList.remove('scale-100', 'opacity-100');
+            box.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        document.getElementById('btn-confirm-cancel').onclick = closeConfirmModal;
+        document.getElementById('btn-confirm-ok').onclick = function() {
+            if (activeConfirmCallback) {
+                activeConfirmCallback();
+            }
+            closeConfirmModal();
+        };
+    </script>
+</body>
+</html>
