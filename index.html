@@ -156,6 +156,10 @@
                         <input type="number" id="employee-shoes-count" value="0" min="0" class="w-24 text-center border-2 border-rose-200 focus:border-rose-400 rounded-xl p-2 font-black text-xl focus:outline-none shadow-sm">
                         <button onclick="adjustEmployeeShoes(1)" class="w-11 h-11 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center text-slate-700 font-black text-lg transition-all active:scale-90">+</button>
                     </div>
+                    <!-- Bổ sung nút lưu số giày trực tiếp cho nhân viên -->
+                    <button onclick="saveEmployeeShoes()" class="w-full bg-rose-500 hover:bg-rose-600 active:scale-[0.98] text-white py-2.5 rounded-xl text-xs font-black tracking-wider uppercase transition-all shadow-sm">
+                        <i class="fa-solid fa-floppy-disk mr-1"></i> Lưu số lượng giày
+                    </button>
                     <p class="text-[9px] text-slate-400 text-center font-bold">Lưu ý: Hoa hồng tự động tính 10.000đ/đôi vào tiền lương tổng.</p>
                 </div>
 
@@ -551,6 +555,20 @@
             input.value = current;
         }
 
+        function saveEmployeeShoes() {
+            const todayStr = getTodayString();
+            let activeShift = state.shifts.find(s => s.nhanVien === state.activeUser && s.ngay === todayStr);
+            if (activeShift) {
+                const count = parseInt(document.getElementById('employee-shoes-count').value) || 0;
+                activeShift.hoaHongGiay = count;
+                saveState();
+                showToast(`Đã lưu ${count} đôi giày hoa hồng thành công!`, "success");
+                renderHeaderAndStats();
+            } else {
+                showToast("Không tìm thấy ca làm việc hiện tại!", "error");
+            }
+        }
+
         function renderEmployeeStatus() {
             const todayStr = getTodayString();
             const activeShift = state.shifts.find(s => s.nhanVien === state.activeUser && s.ngay === todayStr);
@@ -920,13 +938,14 @@
                         </div>
                     </div>
 
-                    <!-- Khu vực điều chỉnh hoa hồng giày trực tiếp -->
+                    <!-- Khu vực điều chỉnh hoa hồng giày trực tiếp và nút Lưu của Staff -->
                     <div class="flex items-center justify-between pt-1 border-t border-slate-50">
                         <div class="flex items-center gap-3">
                             <p class="text-slate-500 font-bold">Giờ làm: <span class="text-slate-800 font-black">${hrs}h</span></p>
-                            <div class="flex items-center gap-1.5 bg-rose-50/50 px-2.5 py-1 rounded-xl border border-rose-100/40">
+                            <div class="flex items-center gap-1.5 bg-rose-50/50 px-2 py-1 rounded-xl border border-rose-100/40">
                                 <span class="text-rose-500 font-black text-[10px] uppercase">Sửa giày:</span>
-                                <input type="number" value="${s.hoaHongGiay}" onchange="updateShiftShoes('${s.id}', this.value)" class="w-12 bg-white border border-rose-200 text-center text-rose-600 font-black rounded-lg py-0.5 focus:outline-none focus:border-rose-400">
+                                <input type="number" id="edit-shoes-${s.id}" value="${s.hoaHongGiay}" class="w-12 bg-white border border-rose-200 text-center text-rose-600 font-black rounded-lg py-0.5 focus:outline-none focus:border-rose-400">
+                                <button onclick="saveStaffShiftShoes('${s.id}')" class="bg-rose-500 hover:bg-rose-600 text-white px-2 py-0.5 rounded-lg text-[10px] font-black transition-all">Lưu</button>
                             </div>
                         </div>
                         <button onclick="deleteShift('${s.id}')" class="text-slate-300 hover:text-rose-500 transition-colors p-1">
@@ -980,8 +999,11 @@
             });
         }
 
-        function updateShiftShoes(shiftId, value) {
-            const parsedVal = parseInt(value);
+        function saveStaffShiftShoes(shiftId) {
+            const inputElement = document.getElementById(`edit-shoes-${shiftId}`);
+            if (!inputElement) return;
+
+            const parsedVal = parseInt(inputElement.value);
             if (isNaN(parsedVal) || parsedVal < 0) {
                 showToast("Số lượng giày không hợp lệ!", "error");
                 return;
@@ -991,7 +1013,7 @@
             if (shift) {
                 shift.hoaHongGiay = parsedVal;
                 saveState();
-                showToast("Đã thay đổi hoa hồng số giày thành công!", "success");
+                showToast("Đã lưu số giày thành công!", "success");
                 renderStaffDashboard();
             }
         }
